@@ -1,0 +1,15 @@
+# Compiled Python bytecode
+*.py[cod]
+__pycache__
+
+# JetBrains IDE
+.idea/
+
+# VENV
+venv
+
+# Configs
+configs/*
+!configs/base.yaml
+!configs/models.py
+!configs/__init__.py
