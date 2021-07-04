@@ -1,3 +1,4 @@
+from abc import ABC
 from enum import Enum
 
 from pydantic import BaseModel
@@ -8,9 +9,11 @@ class Environment(str, Enum):
     PROD = 'prod'
 
 
-class DataBaseConfig(BaseModel):
+class BaseAuthConfig(BaseModel, ABC):
+    _scheme: str = NotImplemented
+
     HOST: str = 'localhost'
-    PORT: int = 3306
+    PORT: int
     USERNAME: str = 'root'
     PASSWORD: str = 'root'
     DATABASE: str = 'shorturl'
@@ -18,7 +21,20 @@ class DataBaseConfig(BaseModel):
     @property
     def url(self) -> str:
         # mysql://USERNAME:PASSWORD@HOST:PORT/DATABASE
-        return f'mysql://{self.USERNAME}:{self.PASSWORD}@{self.HOST}:{self.PORT}/{self.DATABASE}'
+        return f'{self._scheme}://{self.USERNAME}:{self.PASSWORD}@{self.HOST}:{self.PORT}/{self.DATABASE}'
+
+
+class DataBaseConfig(BaseAuthConfig):
+    _scheme = 'mysql'
+
+    PORT: int = 3306
+
+
+class RedisConfig(BaseAuthConfig):
+    _scheme = 'redis'
+
+    PORT: int = 6379
+    DATABASE: int = 0
 
 
 class Config(BaseModel):
@@ -27,5 +43,7 @@ class Config(BaseModel):
     RELOAD: bool = True
     SECRET_KEY: str = 'secret key'
 
-    DB: DataBaseConfig = DataBaseConfig()
     ENV: Environment = Environment.DEV
+
+    DB: DataBaseConfig = DataBaseConfig()
+    REDIS: RedisConfig = RedisConfig()

@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import configs
 from app import api, main
-from app.services import databases
+from app.services import databases, link_counter
 from app.temaplting import templates
 
 __version__ = '0.0.1'
@@ -15,9 +15,11 @@ def create_app() -> FastAPI:
         version=__version__,
         on_startup=[
             databases.connect,
+            link_counter.connect,
         ],
         on_shutdown=[
             databases.disconnect,
+            link_counter.close,
         ],
     )
 

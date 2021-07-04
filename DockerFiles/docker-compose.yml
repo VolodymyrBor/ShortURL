@@ -16,5 +16,6 @@ services:
     image: 'bitnami/redis:latest'
     environment:
       REDIS_PASSWORD: 'root'
+      REDIS_USERNAME: 'root'
     ports:
       - "6379:6379"

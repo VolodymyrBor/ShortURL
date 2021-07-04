@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 
 from app.models import URL
 from app.temaplting import templates
-
+from app.services import link_counter
 
 router = APIRouter()
 
@@ -26,8 +26,11 @@ async def index(request: Request, url: str = Form(...)) -> HTMLResponse:
     except NoMatch:
         url_obj = await URL(full_url=url, url_alias=URL.create_alias(url)).save()
 
+    counter = await link_counter.get_counter(url_obj.url_alias)
+
     context = {
         'request': request,
+        'counter': counter,
         'full_url': url_obj.full_url,
         'short_url': url_obj.get_short_url(str(request.base_url)),
     }

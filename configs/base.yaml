@@ -12,3 +12,9 @@ DB:
   USERNAME: 'root'
   PASSWORD: 'root'
   DATABASE: 'shorturl'
+
+REDIS:
+  HOST: 'localhost'
+  PORT: 6379
+  PASSWORD: 'root'
+  DATABASE: 0
