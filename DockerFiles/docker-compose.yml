@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  mysql:
+    container_name: 'shorturl-mysql'
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_USERNAME: 'root'
+
+  redis:
+    container_name: 'shorturl-redis'
+    image: 'bitnami/redis:latest'
+    environment:
+      PASSWORD: 'root'
+
+
+# MYSQL + ormar
+URL
+  - id
+  - full_url
+  - short_url
+
+# REDIS
+short_url: counter
+
+short_url = random_string(full_url)
+
+Jinja2 + Bootstrap

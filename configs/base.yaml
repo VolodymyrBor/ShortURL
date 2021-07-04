@@ -1,0 +1,5 @@
+ENV: dev
+
+HOST: 'localhost'
+PORT: 8000
+RELOAD: true
