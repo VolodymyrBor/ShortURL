@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Index</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="url" class="form-label">Enter you link</label>
+            <input
+                type="url"
+                class="form-control"
+                id="url"
+                placeholder="Your link"
+                name="url"
+            >
+        </div>
+        <button type="submit" class="btn btn-primary">Shorten</button>
+    </form>
+
+    {% if url %}
+        <h1>You link:</h1>
+        <span>{{ url }}</span>
+    {% endif %}
+
 {% endblock %}
