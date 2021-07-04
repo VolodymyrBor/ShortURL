@@ -8,7 +8,7 @@ from configs import config
 
 
 class LinkCounter(AbstractAsyncContextManager):
-
+    """Counter for links"""
     def __init__(self, conn: Optional[aioredis.Redis] = None):
         self.conn = conn
 

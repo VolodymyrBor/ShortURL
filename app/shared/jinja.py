@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 
 
 class Register:
+    """Register for jinja2 tags"""
 
     def __init__(self):
         self.filters: dict[str, Callable] = {}
@@ -34,4 +35,5 @@ class JinjaTemplates(Jinja2Templates):
         self.env.filters.update(register.filters)
 
     def add_global(self, name: str, value: Any):
+        """Add global to jinja environment"""
         self.env.globals[name] = value

@@ -3,9 +3,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 import configs
-from app import api, main
-from app.services import databases, link_counter
+from app import api, main, models
 from app.temaplting import templates
+from app.services import link_counter
+
 
 __version__ = '0.0.1'
 
@@ -14,11 +15,11 @@ def create_app() -> FastAPI:
     app = FastAPI(
         version=__version__,
         on_startup=[
-            databases.connect,
+            models.connect,
             link_counter.connect,
         ],
         on_shutdown=[
-            databases.disconnect,
+            models.disconnect,
             link_counter.close,
         ],
     )
