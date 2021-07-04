@@ -11,6 +11,13 @@ CONFIG_DIR = Path(__file__).parent
 CONFIG_FILE = CONFIG_DIR / 'config.yaml'
 BASE_CONFIG_FILE = CONFIG_DIR / 'base.yaml'
 
+ROOT_DIR = CONFIG_DIR.parent
+APP_DIR = ROOT_DIR / 'app'
+TEMPLATE_DIR = APP_DIR / 'templates'
+STATIC_DIR = APP_DIR / 'static'
+
+STATIC_URL = '/static'
+
 
 @lru_cache
 def get_config() -> Config:

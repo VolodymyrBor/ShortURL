@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import api
+from temaplting import templates
 
 __version__ = '0.0.1'
 
@@ -20,5 +21,7 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(api.router)
+
+    templates.add_global('__version__', __version__)
 
     return app
