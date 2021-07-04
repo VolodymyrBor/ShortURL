@@ -3,21 +3,40 @@
 {% block content %}
     <form method="post">
         <div class="mb-3">
-            <label for="url" class="form-label">Enter you link</label>
-            <input
-                type="url"
-                class="form-control"
-                id="url"
-                placeholder="Your link"
-                name="url"
-            >
+            <div class="row">
+                <div class="col-10">
+                    <label for="url" class="form-label">Enter you URL</label>
+                    <textarea
+                        type="url"
+                        class="form-control"
+                        id="url"
+                        placeholder="Your URL"
+                        name="url"
+                    >
+                        {% if full_url %}
+                            {{ full_url }}
+                        {% endif %}
+                    </textarea>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary full-btn">Shorten</button>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Shorten</button>
     </form>
 
-    {% if url %}
-        <h1>You link:</h1>
-        <span>{{ url }}</span>
+    {% if short_url %}
+        <div class="mb-3 card bg-white">
+            <div class="card-body">
+                <h5 class="card-title">Your shorten link</h5>
+                <a
+                    class="link-success"
+                    href="{{ short_url }}"
+                >
+                    {{ short_url }}
+                </a>
+            </div>
+        </div>
     {% endif %}
 
 {% endblock %}

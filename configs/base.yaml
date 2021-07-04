@@ -3,3 +3,12 @@ ENV: dev
 HOST: 'localhost'
 PORT: 8000
 RELOAD: true
+
+SECRET_KEY: 'secret_key'
+
+DB:
+  HOST: 'localhost'
+  PORT: 3306
+  USERNAME: 'root'
+  PASSWORD: 'root'
+  DATABASE: 'shorturl'

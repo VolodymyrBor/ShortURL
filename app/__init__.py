@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import configs
 from app import api, main
+from app.services import databases
 from app.temaplting import templates
 
 __version__ = '0.0.1'
@@ -12,6 +13,12 @@ __version__ = '0.0.1'
 def create_app() -> FastAPI:
     app = FastAPI(
         version=__version__,
+        on_startup=[
+            databases.connect,
+        ],
+        on_shutdown=[
+            databases.disconnect,
+        ],
     )
 
     app.add_middleware(

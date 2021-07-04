@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 
-from . import hello_word
+from . import redirects
 
 router = APIRouter(prefix='/api')
 
 router.include_router(
-    router=hello_word.router,
+    router=redirects.router,
     tags=['hello_word'],
 )
