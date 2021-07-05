@@ -1,0 +1,16 @@
+# IDE
+.idea
+
+# Python
+**/__pycache__
+**/.mypy_cache
+**/.pytest_cache
+
+# Envirement
+venv
+
+# Git
+.git
+
+# Docker
+DockerFiles

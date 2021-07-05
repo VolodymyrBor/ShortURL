@@ -16,7 +16,17 @@ class LinkCounter(AbstractAsyncContextManager):
         if self.conn and not self.conn.closed:
             return
 
-        self.conn = await aioredis.create_redis_pool(address=config.REDIS.url)
+        if config.REDIS.USERNAME:
+            self.conn = await aioredis.create_redis_pool(
+                address=config.REDIS.url,
+                timeout=30,
+            )
+        else:
+            self.conn = await aioredis.create_redis_pool(
+                address=config.REDIS.url,
+                password=config.REDIS.PASSWORD,
+                timeout=30,
+            )
 
     async def close(self):
         if self.conn and not self.conn.closed:

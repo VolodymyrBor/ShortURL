@@ -2,20 +2,10 @@ version: '3'
 
 services:
 
-  mysql:
-    container_name: 'shorturl-mysql'
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_ROOT_USERNAME: 'root'
+  shorturl:
+    container_name: 'shorturl'
+    build:
+      context: ..
+      dockerfile: DockerFiles/Dockerfile
     ports:
-      - "3307:3306"
-
-  redis:
-    container_name: 'shorturl-redis'
-    image: 'bitnami/redis:latest'
-    environment:
-      REDIS_PASSWORD: 'root'
-      REDIS_USERNAME: 'root'
-    ports:
-      - "6379:6379"
+      - '8000:8000'
