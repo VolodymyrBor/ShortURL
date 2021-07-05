@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  shorturl:
+    container_name: 'shorturl'
+    build:
+      context: ..
+      dockerfile: DockerFiles/Dockerfile
+    ports:
+      - '8000:8000'

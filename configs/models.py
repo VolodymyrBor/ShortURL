@@ -1,5 +1,6 @@
 from abc import ABC
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -12,11 +13,12 @@ class Environment(str, Enum):
 class BaseAuthConfig(BaseModel, ABC):
     _scheme: str = NotImplemented
 
-    HOST: str = 'localhost'
     PORT: int
-    USERNAME: str = 'root'
-    PASSWORD: str = 'root'
+    HOST: str = 'localhost'
     DATABASE: str = 'shorturl'
+
+    USERNAME: Optional[str] = None
+    PASSWORD: Optional[str] = None
 
     @property
     def url(self) -> str:
@@ -27,6 +29,9 @@ class BaseAuthConfig(BaseModel, ABC):
 class DataBaseConfig(BaseAuthConfig):
     _scheme = 'mysql'
 
+    USERNAME: str = 'root'
+    PASSWORD: str = 'root'
+
     PORT: int = 3306
 
 
@@ -35,6 +40,14 @@ class RedisConfig(BaseAuthConfig):
 
     PORT: int = 6379
     DATABASE: int = 0
+    PASSWORD: str = 'root'
+
+    @property
+    def url(self) -> str:
+        if self.USERNAME:
+            return super().url
+        else:
+            return f'{self._scheme}://{self.HOST}:{self.PORT}/{self.DATABASE}'
 
 
 class Config(BaseModel):
