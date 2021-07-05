@@ -21,7 +21,7 @@ class URL(ormar.Model):
         tablename = 'urls'
 
     pk: int = ormar.Integer(primary_key=True, autoincrement=True)
-    origin_url: str = ormar.String(max_length=512, index=True, unique=True)
+    origin_url: str = ormar.String(max_length=2048, index=True, unique=True)
     url_alias: str = ormar.String(max_length=128, unique=True)
 
     def get_short_url(self, host: str) -> str:
